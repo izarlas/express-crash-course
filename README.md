@@ -4,7 +4,7 @@ This repository contains my personal solutions while following an express course
 
 ### To run the server use
 
-- `npx ts-node src/server.ts` or `npm run start:server`
+- `npx ts-node src/server.ts` or `npm run start` or `npm run dev`
 
 ### Documentation reference
 
