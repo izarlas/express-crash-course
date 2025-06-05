@@ -1,11 +1,12 @@
-import express from "express";
 import { serverPort } from "./constants";
-import { staticMiddleware } from "./middlewares/static";
+import express from "express";
+import cards from "./apis/cards";
+import home from "./apis/home";
 
 const app = express();
+const port = process.env.PORT || serverPort;
 
-app.use(staticMiddleware);
+app.use("/api/home", home);
+app.use("/api/cards", cards);
 
-app.listen(serverPort, () =>
-  console.log(`Server is running on port ${serverPort}`)
-);
+app.listen(port, () => console.log(`Server is running on port ${port}`));
