@@ -1,4 +1,4 @@
-import express, { NextFunction, Request, Response, Router } from "express";
+import express, { Request, Response, Router } from "express";
 import { MOCK_CARDS } from "../mocks/cards-data";
 import { stringSchema } from "../validations/primitiveSchemas";
 
@@ -69,7 +69,7 @@ router.delete("/:id", (req: Request, res: Response) => {
     res.status(404).json({ msg: `Card with id ${id} was not found` });
   }
 
-  res.status(200).json(MOCK_CARDS.filter(card => card.id !== id))
+  res.status(200).json(MOCK_CARDS.filter((card) => card.id !== id));
 });
 
 export default router;
