@@ -13,3 +13,9 @@ This repository contains my personal solutions while following an express course
 ### License
 
 This project is licensed under the MIT License.
+
+### TODO
+
+- Swagger/OpenAPI setup
+- Dockerize
+- Add DB
