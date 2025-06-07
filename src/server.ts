@@ -3,7 +3,8 @@ import express from "express";
 import cards from "./apis/cards";
 import home from "./apis/home";
 import { logger } from "./middlewares/logger";
-import { errorHandler } from "./middlewares/error-handler";
+import { errorHandler } from "./middlewares/errorHandler";
+import { notFound } from "./middlewares/notFound";
 
 const app = express();
 const port = process.env.PORT || serverPort;
@@ -19,6 +20,8 @@ app.use(logger);
 app.use("/api/home", home);
 app.use("/api/cards", cards);
 
+// Catch all middleware
+app.use(notFound);
 // Error handler middleware
 app.use(errorHandler);
 
