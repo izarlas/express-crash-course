@@ -19,3 +19,4 @@ This project is licensed under the MIT License.
 - Swagger/OpenAPI setup
 - Dockerize
 - Add DB
+- Add tests (unit/integration)
