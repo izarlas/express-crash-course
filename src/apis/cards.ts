@@ -1,11 +1,12 @@
-import express, { Request, Response, Router } from "express";
+import express, { NextFunction, Request, Response, Router } from "express";
 import { MOCK_CARDS } from "../mocks/cards-data";
 import { stringSchema } from "../validations/primitiveSchemas";
+import { CustomError } from "../customError";
 
 const router: Router = express.Router();
 
 // Get all cards
-router.get("/", (req: Request, res: Response) => {
+router.get("/", (req: Request, res: Response, next: NextFunction) => {
   const limitParam = req.query.limit;
 
   if (limitParam === undefined) {
@@ -26,34 +27,50 @@ router.get("/", (req: Request, res: Response) => {
 });
 
 // Get single card (by id)
-router.get("/:id", (req: Request, res: Response) => {
+router.get("/:id", (req: Request, res: Response, next: NextFunction) => {
   const id = parseInt(req.params.id);
   const foundCard = MOCK_CARDS.find((card) => card.id === id);
 
-  if (!foundCard)
-    res.status(404).json({ msg: `Card with id ${id} was not found` });
+  if (!foundCard) {
+    const error: CustomError = {
+      message: `Card with id ${id} was not found`,
+      status: 404,
+    };
+
+    return next(error);
+  }
 
   res.status(200).json(foundCard);
 });
 
 // Create new card
-router.post("/", (req: Request, res: Response) => {
-  const newCard = { id: MOCK_CARDS.length + 1, title: req.body.title };
+router.post("/", (req: Request, res: Response, next: NextFunction) => {
+  const newCard = { id: MOCK_CARDS.length + 1, title: req.body?.title };
 
   if (!newCard.title) {
-    res.status(400).json({ msg: "Please include a title" });
+    const error: CustomError = {
+      message: "Please include a title",
+      status: 400,
+    };
+
+    return next(error);
   }
 
   res.status(201).json(MOCK_CARDS);
 });
 
 // Update card (by id)
-router.put("/:id", (req: Request, res: Response) => {
+router.put("/:id", (req: Request, res: Response, next: NextFunction) => {
   const id = parseInt(req.params.id);
   const foundCard = MOCK_CARDS.find((card) => card.id === id);
 
   if (!foundCard) {
-    res.status(404).json({ msg: `Card with id ${id} was not found` });
+    const error: CustomError = {
+      message: `Card with id ${id} was not found`,
+      status: 404,
+    };
+
+    return next(error);
   }
 
   foundCard!.title = req.body.title;
@@ -61,12 +78,17 @@ router.put("/:id", (req: Request, res: Response) => {
 });
 
 // Delete card (by id)
-router.delete("/:id", (req: Request, res: Response) => {
+router.delete("/:id", (req: Request, res: Response, next: NextFunction) => {
   const id = parseInt(req.params.id);
   const foundCard = MOCK_CARDS.find((card) => card.id === id);
 
   if (!foundCard) {
-    res.status(404).json({ msg: `Card with id ${id} was not found` });
+    const error: CustomError = {
+      message: `Card with id ${id} was not found`,
+      status: 404,
+    };
+
+    return next(error);
   }
 
   res.status(200).json(MOCK_CARDS.filter((card) => card.id !== id));
