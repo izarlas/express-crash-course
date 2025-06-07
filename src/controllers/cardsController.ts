@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { MOCK_CARDS } from "../mocks/cards-data";
+import { MOCK_CARDS } from "../mocks/cardsData";
 import { stringSchema } from "../validations/primitiveSchemas";
 import { CustomError } from "../types/customError";
 

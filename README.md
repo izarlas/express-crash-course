@@ -17,6 +17,5 @@ This project is licensed under the MIT License.
 ### TODO
 
 - Swagger/OpenAPI setup
-- Dockerize
-- Add DB
-- Add tests (unit/integration)
+- Add DB?
+- Add more tests achieving high coverage (unit/integration)
