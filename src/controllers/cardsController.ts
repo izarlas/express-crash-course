@@ -38,7 +38,7 @@ export function getCards(
 }
 
 /**
- * Retrieves a card based on the provided id
+ * Retrieves a single card based on the provided id
  *
  * @route GET /api/cards/:id
  *
@@ -61,7 +61,7 @@ export function getCard(req: Request, res: Response, next: NextFunction): void {
 }
 
 /**
- * Creates a card assigning it the provided title and an incremental id
+ * Creates new card
  *
  * @route POST /api/cards
  *
@@ -88,7 +88,7 @@ export function createCard(
 }
 
 /**
- * Updates a card title based on its id
+ * Updates a card title
  *
  * @route PUT /api/cards/:id
  *
@@ -116,7 +116,7 @@ export function updateCard(
 }
 
 /**
- * Deletes a card based on its id
+ * Deletes a card
  *
  * @route DELETE /api/cards/:id
  *
