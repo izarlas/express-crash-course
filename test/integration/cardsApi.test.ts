@@ -10,8 +10,6 @@ describe("cards apis", () => {
   });
 
   describe("GET cards", () => {
-    // TODO test potential errors e.g.  if (!isNaN(intParsedLimit) && intParsedLimit > 0) {
-
     it("retrieves all cards when the limit query param is a negative number", async () => {
       const res = await request(app).get("/api/cards?limit=-1");
 
@@ -60,8 +58,6 @@ describe("cards apis", () => {
       expect(Array.isArray(foundCards)).toBe(true);
       expect(foundCards).toEqual(MOCK_CARDS);
     });
-
-    // it("", () => {});
   });
 
   describe("GET card by id", () => {
