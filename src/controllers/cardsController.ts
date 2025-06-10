@@ -9,7 +9,7 @@ import { CustomError } from "../types/customError";
  * @route GET /api/cards
  * @queryParam limit - Optional limit of cards to be returned
  *
- * @returns { Array<Card> } - 200 List of cards
+ * @returns { Array<{ id: number, title: string}> } - 200 List of cards
  */
 export function getCards(
   req: Request,
@@ -65,7 +65,7 @@ export function getCard(req: Request, res: Response, next: NextFunction): void {
  *
  * @route POST /api/cards
  *
- * @returns { Array<Card> } - 200 List of cards, including the created card
+ * @returns { Array<{ id: number, title: string}> } - 200 List of cards, including the created card
  */
 export function createCard(
   req: Request,
@@ -92,7 +92,7 @@ export function createCard(
  *
  * @route PUT /api/cards/:id
  *
- * @returns { Array<Card> } - 200 List of cards, including the updated card
+ * @returns { Array<{ id: number, title: string}> } - 200 List of cards, including the updated card
  */
 export function updateCard(
   req: Request,
@@ -120,7 +120,7 @@ export function updateCard(
  *
  * @route DELETE /api/cards/:id
  *
- * @returns { Array<Card> } - 200 List of cards, after the deleted card is removed
+ * @returns { Array<{ id: number, title: string}> } - 200 List of cards, after the deleted card is removed
  */
 export function deleteCard(
   req: Request,

@@ -1,0 +1,149 @@
+openapi: 3.1.0
+info:
+  title: Cards API
+  description: Cards CRUD APIs
+
+servers:
+  - url: http://localhost:8000
+
+paths:
+  /api/cards:
+    get:
+      tags:
+        - cards
+      summary: Retrieve cards
+      description: Retrieves all cards or a limited subset
+      parameters:
+        - name: limit
+          in: query
+          description: The number of cards to return
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        "200":
+          description: List of cards
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Card"
+    post:
+      tags:
+        - cards
+      summary: Creates a card
+      description: Creates a card
+      requestBody:
+        description: Create a new card
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CardTitle"
+        required: true
+      responses:
+        "201":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Card"
+      "400":
+        description: Please include a title
+
+  /api/cards/{id}:
+    get:
+      tags:
+        - cards
+      summary: Retrieves single card
+      description: Retrieves single card by id
+      parameters:
+        - name: id
+          in: path
+          description: The id of the card to retrieve
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Card"
+      "404":
+        description: Card with id ${id} was not found
+
+    put:
+      tags:
+        - cards
+      summary: Updates a card
+      description: Updates a card title by id
+      parameters:
+        - name: id
+          in: path
+          description: The id of the card to update
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      requestBody:
+        description: Create a new card
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CardTitle"
+        required: true
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Card"
+      "404":
+        description: Card with id ${id} was not found
+
+    delete:
+      tags:
+        - cards
+      summary: Deletes a card
+      description: Deletes a card by id
+      parameters:
+        - name: id
+          in: path
+          description: The id of the card to delete
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Card"
+      "404":
+        description: Card with id ${id} was not found
+
+components:
+  schemas:
+    Card:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+    CardTitle:
+      type: object
+      properties:
+        title:
+          type: string
