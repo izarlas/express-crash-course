@@ -2,9 +2,11 @@ const output = document.querySelector("#output");
 const button = document.querySelector("#get-cards-button");
 const form = document.querySelector("#card-form");
 
+const getCardsApiUrl = "http://localhost:8000/api/cards";
+
 async function fetchCards() {
   try {
-    const res = await fetch("http://localhost:8000/api/cards");
+    const res = await fetch(getCardsApiUrl);
 
     if (!res.ok) {
       throw new Error("Failed to fetch cards");
@@ -32,7 +34,7 @@ async function addCard(event) {
   const title = formData.get("title");
 
   try {
-    const res = await fetch("http://localhost:8000/api/cards", {
+    const res = await fetch(getCardsApiUrl, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

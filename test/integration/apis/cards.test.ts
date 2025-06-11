@@ -1,8 +1,6 @@
-import express from "express";
-import cards from "../../src/apis/cards";
 import request from "supertest";
-import { MOCK_CARDS } from "../../src/mocks/cardsData";
-import { app } from "../../src/server";
+import { MOCK_CARDS } from "../../../src/mocks/cardsData";
+import { app } from "../../../src/server";
 
 const cardsApiUrl = "/api/cards";
 const requestHeadersJson = "application/json";
@@ -128,6 +126,7 @@ describe("cards apis", () => {
       expect(res.body).toStrictEqual({ msg: "Card with id 20 was not found" });
     });
   });
+
   describe("deleteCard", () => {
     it("deletes a card by id and returns 200 status code and updated card list", async () => {
       const res = await request(app).delete(`${cardsApiUrl}/1`);
