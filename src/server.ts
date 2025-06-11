@@ -10,7 +10,7 @@ import YAML from "yamljs";
 import cors from "cors";
 
 const serverPort = 8000;
-const app = express();
+export const app = express();
 
 // Enables cors for all routes
 app.use(cors());
